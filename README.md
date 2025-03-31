@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/govind2809/donateplus/main/assets/readme-banner.png">
+  <img src=https://raw.githubusercontent.com/govind2809/donateplus/main/assets/readme-banner.png>
 </p>
 
 ## 🌟 Revolutionizing Blood Donation
