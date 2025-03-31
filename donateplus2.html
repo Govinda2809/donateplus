@@ -1,0 +1,466 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DonatePlus.dev | Life-Saving Connections</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        
+    /* New Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+
+    input[type="email"]::placeholder {
+        font-weight: 400;
+        letter-spacing: 0.3px;
+        color: #777;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Optional: Style the input text differently when typed */
+    input[type="email"] {
+        font-weight: 500;
+        color: #444;
+    }
+
+    /* Updated Elements with Animations */
+    .logo {
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .tagline {
+        animation: fadeInUp 1s ease-out 0.2s;
+        animation-fill-mode: backwards;
+    }
+
+    .stats {
+        animation: fadeInUp 1s ease-out 0.4s;
+        animation-fill-mode: backwards;
+    }
+
+    .countdown-item {
+        transition: transform 0.3s ease;
+    }
+
+    .countdown-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .countdown-number {
+        animation: pulse 2s infinite;
+    }
+
+    button {
+        transition: all 0.3s ease !important;
+    }
+
+    .center-drop {
+            position: absolute;
+            top: 43%;
+            transform: translate(-50%, -50%);
+            font-size: 7rem;
+            opacity: 0.1;
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+
+    /* Email Input Animation */
+    input[type="email"] {
+        transition: all 0.3s ease;
+    }
+
+    input[type="email"]:focus {
+        animation: pulse 2s infinite;
+    }
+
+    /* Social Links Animation */
+    .social-links a {
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .social-links a:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+    }
+
+        
+        body {
+            background: #fff5f5;
+            color: #4a4a4a;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .blood-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background: url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 15Q40 25 30 35 20 50 25 65 30 80 50 95 70 80 75 65 80 50 70 35 60 25 50 15Z" fill="%23ff6b6b"/></svg>');
+            z-index: -1;
+        }
+
+        .logo {
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '❤️';
+            font-size: 2.2rem;
+        }
+
+        .tagline {
+            font-size: 1.4rem;
+            color: #ff9292;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .mission {
+            color: #666;
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .countdown-item {
+            text-align: center;
+            background: rgba(255, 107, 107, 0.08);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #ffd6d6;
+            backdrop-filter: blur(4px);
+        }
+
+        .countdown-number {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #ff6b6b;
+        }
+
+        .countdown-label {
+            color: #ff9292;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .email-form {
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem 0;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 1.2rem;
+            border-radius: 50px;
+            border: 2px solid #ffd6d6;
+            background: rgba(255, 255, 255, 0.9);
+            color: #666;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+            font-weight: 300;
+        }
+
+        input[type="email"]:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.2);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 50px;
+            border: none;
+            background: linear-gradient(135deg, #ff6b6b, #ff9292);
+            color: #fff;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Poppins', sans-serif , ; /* Ensure font consistency */
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            color: #ff9292;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+
+        .social-links {
+            position: fixed;
+            bottom: 2rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: #ff9292;
+            text-decoration: none;
+            transition: 0.3s;
+            font-weight: 300;
+        }
+
+        .social-links a:hover {
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="center-drop">🩸</div>
+        
+        <h1 class="logo">DonatePlus.dev</h1>
+        <p class="tagline">Connecting  Life-Saving Donors with Those in Need</p>
+        <p class="mission">Join our mission to eliminate blood shortages through real-time matching and AI-driven urgency alerts.</p>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">48h → 4h</div>
+                <div class="stat-label">Avg.Response Time</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Lives Saved</div>
+            </div>
+        </div>
+
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">17</div>
+                <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">14</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">42</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+        </div>
+
+        <div class="email-form">
+            <input type="email" placeholder="Your email address...">
+            <button>Join Waitlist</button>
+        </div>
+
+        <div class="social-links">
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+        </div>
+    </div>
+
+    <script> 
+    src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"
+    src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"
+
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyBpxzUqWMpBzuDX18M8ZNd-zdIequv1IpE",
+    authDomain: "donateplus-e3396.firebaseapp.com",
+    projectId: "donateplus-e3396",
+    storageBucket: "donateplus-e3396.firebasestorage.app",
+    messagingSenderId: "56979453714",
+    appId: "1:56979453714:web:40277dfb6a33030043a5cb",
+    measurementId: "G-QNYB1N8X4T"
+  };
+
+
+
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+
+
+document.querySelector('button').addEventListener('click', async (e) => {
+    e.preventDefault();
+    const email = document.querySelector('input').value;
+    const button = document.querySelector('button');
+    
+    if(!validateEmail(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    try {
+        // Show loading state
+        button.innerHTML = 'Saving...';
+        button.disabled = true;
+
+        // Add to Firestore
+        await db.collection("waitlist").add({
+            email: email,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            source: "website"
+        });
+
+        // Confetti effect
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#ff6b6b', '#ff9292']
+        });
+
+        // Clear input
+        document.querySelector('input').value = '';
+        alert('Thank you! You\'re now on our waitlist 🩸');
+    } catch (error) {
+        console.error("Error saving email:", error);
+        alert('Something went wrong. Please try again.');
+    } finally {
+        // Reset button
+        button.innerHTML = 'Join Waitlist';
+        button.disabled = false;
+    }
+});
+
+
+
+
+
+  
+
+        // Set launch date (Update to your launch date)
+        const launchDate = new Date('2025-04-12T00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        document.querySelector('button').addEventListener('click', function() {
+            const email = document.querySelector('input').value;
+            if (validateEmail(email)) {
+                alert('Thank you for supporting this life-saving mission! We\'ll be in touch soon.');
+                // Add email collection logic
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        });
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if(!re.test(email)) {
+        document.querySelector('input').classList.add('error');
+        return false;
+    }
+    return true;
+
+        }
+
+        document.querySelector('button').addEventListener('click', function() {
+        const email = document.querySelector('input').value;
+        if (validateEmail(email)) {
+            // Confetti effect
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff6b6b', '#ff9292']
+            });
+            
+            alert('Thank you for supporting this life-saving mission! We\'ll be in touch soon.');
+        } else {
+            alert('Please enter a valid email address.');
+        }
+    });
+
+
+
+
+
+    </script>
+</body>
+</html>
